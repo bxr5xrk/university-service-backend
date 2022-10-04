@@ -5,6 +5,7 @@ type Student {
 
 input CreateStudentInput {
   fullName: String!
+  groupId: Int
 }
 
 input UpdateStudentInput {

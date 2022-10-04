@@ -6,10 +6,11 @@ import { CreateStudentInput, UpdateStudentInput } from 'src/types/graphql';
 export class StudentService {
   constructor(private prisma: PrismaService) {}
 
-  create({ fullName }: CreateStudentInput) {
+  create({ fullName, groupId }: CreateStudentInput) {
     return this.prisma.student.create({
       data: {
         fullName,
+        groupId,
       },
     });
   }
