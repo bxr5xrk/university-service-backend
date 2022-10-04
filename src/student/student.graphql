@@ -1,0 +1,24 @@
+type Student {
+  id: Int!
+  fullName: String!
+}
+
+input CreateStudentInput {
+  fullName: String!
+}
+
+input UpdateStudentInput {
+  id: Int!
+  fullName: String!
+}
+
+type Query {
+  students: [Student]!
+  student(id: Int!): Student
+}
+
+type Mutation {
+  createStudent(createStudentInput: CreateStudentInput!): Student!
+  updateStudent(updateStudentInput: UpdateStudentInput!): Student!
+  removeStudent(id: Int!): Student
+}
