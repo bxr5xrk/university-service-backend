@@ -7,6 +7,7 @@ import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { StudentModule } from './student/student.module';
+import { GroupModule } from './group/group.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { StudentModule } from './student/student.module';
     }),
     PrismaModule,
     StudentModule,
+    GroupModule,
   ],
 
   controllers: [AppController],

@@ -1,0 +1,25 @@
+type Group {
+  id: Int!
+  title: String!
+  students: [Student!]!
+}
+
+input CreateGroupInput {
+  title: String!
+}
+
+input UpdateGroupInput {
+  id: Int!
+  title: String!
+}
+
+type Query {
+  groups: [Group]!
+  group(id: Int!): Group
+}
+
+type Mutation {
+  createGroup(createGroupInput: CreateGroupInput!): Group!
+  updateGroup(updateGroupInput: UpdateGroupInput!): Group!
+  removeGroup(id: Int!): Group
+}
