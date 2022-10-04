@@ -19,11 +19,12 @@ export class UpdateGroupInput {
 
 export class CreateStudentInput {
     fullName: string;
-    groupId?: Nullable<number>;
+    groupId: number;
 }
 
 export class UpdateStudentInput {
     id: number;
+    groupId: number;
     fullName: string;
 }
 
@@ -60,6 +61,7 @@ export abstract class IMutation {
 export class Student {
     id: number;
     fullName: string;
+    groupId: number;
 }
 
 type Nullable<T> = T | null;

@@ -1,15 +1,17 @@
 type Student {
   id: Int!
   fullName: String!
+  groupId: Int!
 }
 
 input CreateStudentInput {
   fullName: String!
-  groupId: Int
+  groupId: Int!
 }
 
 input UpdateStudentInput {
   id: Int!
+  groupId: Int!
   fullName: String!
 }
 

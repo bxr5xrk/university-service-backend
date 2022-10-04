@@ -22,12 +22,14 @@ export class StudentService {
   findOne(id: number) {
     return this.prisma.student.findUnique({
       where: { id },
-      // select: { fullName: true, id: true },
     });
   }
 
-  update(id: number, { fullName }: UpdateStudentInput) {
-    return this.prisma.student.update({ where: { id }, data: { fullName } });
+  update(id: number, { fullName, groupId }: UpdateStudentInput) {
+    return this.prisma.student.update({
+      where: { id },
+      data: { fullName, groupId },
+    });
   }
 
   remove(id: number) {
