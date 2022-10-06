@@ -15,7 +15,7 @@ export class CreateGroupInput {
 export class UpdateGroupInput {
     id: number;
     title?: Nullable<string>;
-    lecturersId?: Nullable<Nullable<number>[]>;
+    lecturerId?: Nullable<number>;
 }
 
 export class CreateLecturerInput {

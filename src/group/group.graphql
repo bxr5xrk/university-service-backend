@@ -12,7 +12,7 @@ input CreateGroupInput {
 input UpdateGroupInput {
   id: Int!
   title: String
-  lecturersId: [Int]
+  lecturerId: Int
 }
 
 type Query {

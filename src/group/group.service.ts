@@ -29,15 +29,26 @@ export class GroupService {
     });
   }
 
-  update(id: number, { title, lecturersId }: UpdateGroupInput) {
-    const lecturersArr = [];
-    lecturersId.map((i) => lecturersArr.push({ id: i }));
-
-    return this.prisma.group.update({
+  async update(id: number, { title, lecturerId }: UpdateGroupInput) {
+    const find = await this.prisma.group.findUnique({
       where: { id },
-      data: { title, lecturers: { connect: lecturersArr } },
-      include: { students: true, lecturers: true },
+      include: { lecturers: true },
     });
+    const includes = find.lecturers.find((i) => i.id === lecturerId);
+
+    if (includes) {
+      return this.prisma.group.update({
+        where: { id },
+        data: { title, lecturers: { disconnect: { id: lecturerId } } },
+        include: { students: true, lecturers: true },
+      });
+    } else {
+      return this.prisma.group.update({
+        where: { id },
+        data: { title, lecturers: { connect: { id: lecturerId } } },
+        include: { students: true, lecturers: true },
+      });
+    }
   }
 
   remove(id: number) {
