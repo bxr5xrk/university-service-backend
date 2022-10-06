@@ -2,6 +2,7 @@ type Lecturer {
   id: Int!
   fullName: String!
   groups: [Group!]!
+  subjects: [Subject!]!
 }
 
 input CreateLecturerInput {
@@ -10,7 +11,8 @@ input CreateLecturerInput {
 
 input UpdateLecturerInput {
   id: Int!
-  fullName: String!
+  fullName: String
+  subjectId: Int
 }
 
 type Query {
