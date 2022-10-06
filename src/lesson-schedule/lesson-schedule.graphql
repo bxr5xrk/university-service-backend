@@ -1,0 +1,32 @@
+type LessonSchedule {
+  id: Int!
+  order: Int!
+  time: String!
+}
+
+
+input CreateLessonScheduleInput {
+  order: Int!
+  time: String!
+}
+
+input UpdateLessonScheduleInput {
+  id: Int!
+  order: Int!
+  time: String!
+}
+
+type Query {
+  lessonSchedules: [LessonSchedule]!
+  lessonSchedule(id: Int!): LessonSchedule
+}
+
+type Mutation {
+  createLessonSchedule(
+    createLessonScheduleInput: CreateLessonScheduleInput!
+  ): LessonSchedule!
+  updateLessonSchedule(
+    updateLessonScheduleInput: UpdateLessonScheduleInput!
+  ): LessonSchedule!
+  removeLessonSchedule(id: Int!): LessonSchedule
+}

@@ -28,6 +28,17 @@ export class UpdateLecturerInput {
     subjectId?: Nullable<number>;
 }
 
+export class CreateLessonScheduleInput {
+    order: number;
+    time: string;
+}
+
+export class UpdateLessonScheduleInput {
+    id: number;
+    order: number;
+    time: string;
+}
+
 export class CreateStudentInput {
     fullName: string;
     groupId: number;
@@ -64,6 +75,10 @@ export abstract class IQuery {
 
     abstract lecturer(id: number): Nullable<Lecturer> | Promise<Nullable<Lecturer>>;
 
+    abstract lessonSchedules(): Nullable<LessonSchedule>[] | Promise<Nullable<LessonSchedule>[]>;
+
+    abstract lessonSchedule(id: number): Nullable<LessonSchedule> | Promise<Nullable<LessonSchedule>>;
+
     abstract students(): Nullable<Student>[] | Promise<Nullable<Student>[]>;
 
     abstract student(id: number): Nullable<Student> | Promise<Nullable<Student>>;
@@ -86,6 +101,12 @@ export abstract class IMutation {
 
     abstract removeLecturer(id: number): Nullable<Lecturer> | Promise<Nullable<Lecturer>>;
 
+    abstract createLessonSchedule(createLessonScheduleInput: CreateLessonScheduleInput): LessonSchedule | Promise<LessonSchedule>;
+
+    abstract updateLessonSchedule(updateLessonScheduleInput: UpdateLessonScheduleInput): LessonSchedule | Promise<LessonSchedule>;
+
+    abstract removeLessonSchedule(id: number): Nullable<LessonSchedule> | Promise<Nullable<LessonSchedule>>;
+
     abstract createStudent(createStudentInput: CreateStudentInput): Student | Promise<Student>;
 
     abstract updateStudent(updateStudentInput: UpdateStudentInput): Student | Promise<Student>;
@@ -104,6 +125,12 @@ export class Lecturer {
     fullName: string;
     groups: Group[];
     subjects: Subject[];
+}
+
+export class LessonSchedule {
+    id: number;
+    order: number;
+    time: string;
 }
 
 export class Student {

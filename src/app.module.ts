@@ -10,6 +10,7 @@ import { StudentModule } from './student/student.module';
 import { GroupModule } from './group/group.module';
 import { LecturerModule } from './lecturer/lecturer.module';
 import { SubjectModule } from './subject/subject.module';
+import { LessonScheduleModule } from './lesson-schedule/lesson-schedule.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { SubjectModule } from './subject/subject.module';
     GroupModule,
     LecturerModule,
     SubjectModule,
+    LessonScheduleModule,
   ],
 
   controllers: [AppController],

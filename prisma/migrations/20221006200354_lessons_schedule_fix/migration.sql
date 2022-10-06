@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "LessonSchedule" ALTER COLUMN "time" SET DEFAULT '08:30-09:50',
+ALTER COLUMN "time" SET DATA TYPE TEXT;
