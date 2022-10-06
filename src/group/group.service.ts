@@ -1,6 +1,7 @@
 import { PrismaService } from './../prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
 import { CreateGroupInput, UpdateGroupInput } from 'src/types/graphql';
+import { addOrRemoveLecturer } from 'src/utils';
 
 @Injectable()
 export class GroupService {
@@ -30,25 +31,19 @@ export class GroupService {
   }
 
   async update(id: number, { title, lecturerId }: UpdateGroupInput) {
-    const find = await this.prisma.group.findUnique({
+    const findLecturers = await this.prisma.group.findUnique({
       where: { id },
       include: { lecturers: true },
     });
-    const includes = find.lecturers.find((i) => i.id === lecturerId);
 
-    if (includes) {
-      return this.prisma.group.update({
-        where: { id },
-        data: { title, lecturers: { disconnect: { id: lecturerId } } },
-        include: { students: true, lecturers: true },
-      });
-    } else {
-      return this.prisma.group.update({
-        where: { id },
-        data: { title, lecturers: { connect: { id: lecturerId } } },
-        include: { students: true, lecturers: true },
-      });
-    }
+    return this.prisma.group.update({
+      where: { id },
+      data: {
+        title,
+        lecturers: addOrRemoveLecturer(findLecturers.lecturers, lecturerId),
+      },
+      include: { students: true, lecturers: true },
+    });
   }
 
   remove(id: number) {
