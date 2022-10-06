@@ -1,4 +1,4 @@
-import { Lecturer } from '@prisma/client';
+import { Lecturer, Subject } from '@prisma/client';
 
 export const addOrRemoveLecturer = (
   lecturers: Lecturer[],
@@ -9,4 +9,12 @@ export const addOrRemoveLecturer = (
   return includes
     ? { disconnect: { id: lecturerId } }
     : { connect: { id: lecturerId } };
+};
+
+export const addOrRemoveSubject = (subject: Subject[], subjectId: number) => {
+  const includes = subject.find((i) => i.id === subjectId);
+
+  return includes
+    ? { disconnect: { id: subjectId } }
+    : { connect: { id: subjectId } };
 };

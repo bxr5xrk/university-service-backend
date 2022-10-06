@@ -24,7 +24,8 @@ export class CreateLecturerInput {
 
 export class UpdateLecturerInput {
     id: number;
-    fullName: string;
+    fullName?: Nullable<string>;
+    subjectId?: Nullable<number>;
 }
 
 export class CreateStudentInput {
@@ -36,6 +37,15 @@ export class UpdateStudentInput {
     id: number;
     groupId: number;
     fullName: string;
+}
+
+export class CreateSubjectInput {
+    title: string;
+}
+
+export class UpdateSubjectInput {
+    id: number;
+    title: string;
 }
 
 export class Group {
@@ -57,6 +67,10 @@ export abstract class IQuery {
     abstract students(): Nullable<Student>[] | Promise<Nullable<Student>[]>;
 
     abstract student(id: number): Nullable<Student> | Promise<Nullable<Student>>;
+
+    abstract subjects(): Nullable<Subject>[] | Promise<Nullable<Subject>[]>;
+
+    abstract subject(id: number): Nullable<Subject> | Promise<Nullable<Subject>>;
 }
 
 export abstract class IMutation {
@@ -77,18 +91,31 @@ export abstract class IMutation {
     abstract updateStudent(updateStudentInput: UpdateStudentInput): Student | Promise<Student>;
 
     abstract removeStudent(id: number): Nullable<Student> | Promise<Nullable<Student>>;
+
+    abstract createSubject(createSubjectInput: CreateSubjectInput): Subject | Promise<Subject>;
+
+    abstract updateSubject(updateSubjectInput: UpdateSubjectInput): Subject | Promise<Subject>;
+
+    abstract removeSubject(id: number): Nullable<Subject> | Promise<Nullable<Subject>>;
 }
 
 export class Lecturer {
     id: number;
     fullName: string;
     groups: Group[];
+    subjects: Subject[];
 }
 
 export class Student {
     id: number;
     fullName: string;
     groupId: number;
+}
+
+export class Subject {
+    id: number;
+    title: string;
+    lecturers: Lecturer[];
 }
 
 type Nullable<T> = T | null;
