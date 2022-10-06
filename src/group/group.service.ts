@@ -10,13 +10,13 @@ export class GroupService {
       data: {
         title,
       },
-      include: { students: true },
+      include: { students: true, lecturers: true },
     });
   }
 
   findAll() {
     return this.prisma.group.findMany({
-      include: { students: true },
+      include: { students: true, lecturers: true },
     });
   }
 
@@ -25,22 +25,25 @@ export class GroupService {
       where: {
         id,
       },
-      include: { students: true },
+      include: { students: true, lecturers: true },
     });
   }
 
-  update(id: number, { title }: UpdateGroupInput) {
+  update(id: number, { title, lecturersId }: UpdateGroupInput) {
+    const lecturersArr = [];
+    lecturersId.map((i) => lecturersArr.push({ id: i }));
+
     return this.prisma.group.update({
       where: { id },
-      data: { title },
-      include: { students: true },
+      data: { title, lecturers: { connect: lecturersArr } },
+      include: { students: true, lecturers: true },
     });
   }
 
   remove(id: number) {
     return this.prisma.group.delete({
       where: { id },
-      include: { students: true },
+      include: { students: true, lecturers: true },
     });
   }
 }
