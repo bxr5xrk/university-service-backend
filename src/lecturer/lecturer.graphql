@@ -1,0 +1,25 @@
+type Lecturer {
+  id: Int!
+  fullName: String!
+  groups: [Group!]!
+}
+
+input CreateLecturerInput {
+  fullName: String!
+}
+
+input UpdateLecturerInput {
+  id: Int!
+  fullName: String!
+}
+
+type Query {
+  lecturers: [Lecturer]!
+  lecturer(id: Int!): Lecturer
+}
+
+type Mutation {
+  createLecturer(createLecturerInput: CreateLecturerInput!): Lecturer!
+  updateLecturer(updateLecturerInput: UpdateLecturerInput!): Lecturer!
+  removeLecturer(id: Int!): Lecturer
+}

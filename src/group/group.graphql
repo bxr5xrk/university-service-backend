@@ -2,6 +2,7 @@ type Group {
   id: Int!
   title: String!
   students: [Student!]!
+  lecturers: [Lecturer!]!
 }
 
 input CreateGroupInput {
@@ -10,7 +11,8 @@ input CreateGroupInput {
 
 input UpdateGroupInput {
   id: Int!
-  title: String!
+  title: String
+  lecturersId: [Int]
 }
 
 type Query {

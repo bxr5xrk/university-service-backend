@@ -11,9 +11,10 @@ datasource db {
 }
 
 model Group {
-  id       Int       @id @default(autoincrement())
-  title    String    @unique
-  students Student[]
+  id        Int        @id @default(autoincrement())
+  title     String     @unique
+  students  Student[]
+  lecturers Lecturer[]
 }
 
 model Student {
@@ -21,4 +22,10 @@ model Student {
   fullName String @unique
   groupId  Int?
   group    Group? @relation(fields: [groupId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model Lecturer {
+  id       Int     @id @default(autoincrement())
+  fullName String  @unique
+  groups   Group[]
 }

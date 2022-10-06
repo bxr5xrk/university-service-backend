@@ -8,6 +8,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { StudentModule } from './student/student.module';
 import { GroupModule } from './group/group.module';
+import { LecturerModule } from './lecturer/lecturer.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { GroupModule } from './group/group.module';
     PrismaModule,
     StudentModule,
     GroupModule,
+    LecturerModule,
   ],
 
   controllers: [AppController],
