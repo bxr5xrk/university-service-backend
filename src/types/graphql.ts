@@ -97,6 +97,7 @@ export class Group {
     title: string;
     students: Student[];
     lecturers: Lecturer[];
+    templates: Template[];
 }
 
 export abstract class IQuery {
@@ -168,6 +169,7 @@ export class Lecturer {
     fullName: string;
     groups: Group[];
     subjects: Subject[];
+    templates: Template[];
 }
 
 export class LessonSchedule {

@@ -9,27 +9,27 @@ export class LecturerService {
   create({ fullName }: CreateLecturerInput) {
     return this.prisma.lecturer.create({
       data: { fullName },
-      include: { groups: true, subjects: true },
+      include: { groups: true, subjects: true, templates: true },
     });
   }
 
   findAll() {
     return this.prisma.lecturer.findMany({
-      include: { groups: true, subjects: true },
+      include: { groups: true, subjects: true, templates: true },
     });
   }
 
   findOne(id: number) {
     return this.prisma.lecturer.findUnique({
       where: { id },
-      include: { groups: true, subjects: true },
+      include: { groups: true, subjects: true, templates: true },
     });
   }
 
   async update(id: number, { fullName, subjectId }: UpdateLecturerInput) {
     const findSubject = await this.prisma.lecturer.findUnique({
       where: { id },
-      include: { subjects: true },
+      include: { groups: true, subjects: true, templates: true },
     });
 
     return this.prisma.lecturer.update({
@@ -38,14 +38,14 @@ export class LecturerService {
         fullName,
         subjects: addOrRemoveSubject(findSubject.subjects, subjectId),
       },
-      include: { groups: true, subjects: true },
+      include: { groups: true, subjects: true, templates: true },
     });
   }
 
   remove(id: number) {
     return this.prisma.lecturer.delete({
       where: { id },
-      include: { groups: true, subjects: true },
+      include: { groups: true, subjects: true, templates: true },
     });
   }
 }
