@@ -11,6 +11,7 @@ import { GroupModule } from './group/group.module';
 import { LecturerModule } from './lecturer/lecturer.module';
 import { SubjectModule } from './subject/subject.module';
 import { LessonScheduleModule } from './lesson-schedule/lesson-schedule.module';
+import { TemplateModule } from './template/template.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { LessonScheduleModule } from './lesson-schedule/lesson-schedule.module';
     LecturerModule,
     SubjectModule,
     LessonScheduleModule,
+    TemplateModule,
   ],
 
   controllers: [AppController],

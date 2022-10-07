@@ -1,0 +1,57 @@
+type Template {
+  id: Int!
+  groupId: Int!
+  lecturerId: Int!
+  subjectId: Int!
+  groupType: groupType!
+  lessonType: lessonType!
+  lecturer: Lecturer!
+  group: Group!
+  subject: Subject!
+  link: String
+  cabinet: String
+}
+
+enum groupType {
+  All
+  First
+  Second
+}
+
+enum lessonType {
+  Lecture
+  Seminar
+  Exam
+}
+
+input CreateTemplateInput {
+  groupId: Int!
+  lecturerId: Int!
+  subjectId: Int!
+  groupType: groupType!
+  lessonType: lessonType!
+  link: String
+  cabinet: String
+}
+
+input UpdateTemplateInput {
+  id: Int!
+  groupId: Int
+  lecturerId: Int
+  subjectId: Int
+  groupType: groupType
+  lessonType: lessonType
+  link: String
+  cabinet: String
+}
+
+type Query {
+  templates: [Template]!
+  template(id: Int!): Template
+}
+
+type Mutation {
+  createTemplate(createTemplateInput: CreateTemplateInput!): Template!
+  updateTemplate(updateTemplateInput: UpdateTemplateInput!): Template!
+  removeTemplate(id: Int!): Template
+}

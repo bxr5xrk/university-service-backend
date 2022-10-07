@@ -8,6 +8,18 @@
 /* tslint:disable */
 /* eslint-disable */
 
+export enum groupType {
+    All = "All",
+    First = "First",
+    Second = "Second"
+}
+
+export enum lessonType {
+    Lecture = "Lecture",
+    Seminar = "Seminar",
+    Exam = "Exam"
+}
+
 export class CreateGroupInput {
     title: string;
 }
@@ -59,6 +71,27 @@ export class UpdateSubjectInput {
     title: string;
 }
 
+export class CreateTemplateInput {
+    groupId: number;
+    lecturerId: number;
+    subjectId: number;
+    groupType: groupType;
+    lessonType: lessonType;
+    link?: Nullable<string>;
+    cabinet?: Nullable<string>;
+}
+
+export class UpdateTemplateInput {
+    id: number;
+    groupId?: Nullable<number>;
+    lecturerId?: Nullable<number>;
+    subjectId?: Nullable<number>;
+    groupType?: Nullable<groupType>;
+    lessonType?: Nullable<lessonType>;
+    link?: Nullable<string>;
+    cabinet?: Nullable<string>;
+}
+
 export class Group {
     id: number;
     title: string;
@@ -86,6 +119,10 @@ export abstract class IQuery {
     abstract subjects(): Nullable<Subject>[] | Promise<Nullable<Subject>[]>;
 
     abstract subject(id: number): Nullable<Subject> | Promise<Nullable<Subject>>;
+
+    abstract templates(): Nullable<Template>[] | Promise<Nullable<Template>[]>;
+
+    abstract template(id: number): Nullable<Template> | Promise<Nullable<Template>>;
 }
 
 export abstract class IMutation {
@@ -118,6 +155,12 @@ export abstract class IMutation {
     abstract updateSubject(updateSubjectInput: UpdateSubjectInput): Subject | Promise<Subject>;
 
     abstract removeSubject(id: number): Nullable<Subject> | Promise<Nullable<Subject>>;
+
+    abstract createTemplate(createTemplateInput: CreateTemplateInput): Template | Promise<Template>;
+
+    abstract updateTemplate(updateTemplateInput: UpdateTemplateInput): Template | Promise<Template>;
+
+    abstract removeTemplate(id: number): Nullable<Template> | Promise<Nullable<Template>>;
 }
 
 export class Lecturer {
@@ -143,6 +186,20 @@ export class Subject {
     id: number;
     title: string;
     lecturers: Lecturer[];
+}
+
+export class Template {
+    id: number;
+    groupId: number;
+    lecturerId: number;
+    subjectId: number;
+    groupType: groupType;
+    lessonType: lessonType;
+    lecturer: Lecturer;
+    group: Group;
+    subject: Subject;
+    link?: Nullable<string>;
+    cabinet?: Nullable<string>;
 }
 
 type Nullable<T> = T | null;
