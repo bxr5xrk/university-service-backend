@@ -8,28 +8,47 @@ export class TemplateService {
   create(data: CreateTemplateInput) {
     return this.prisma.template.create({
       data,
-      include: { lecturer: true, subject: true, group: true },
+      include: { lessons: true },
     });
   }
 
   findAll() {
     return this.prisma.template.findMany({
-      include: { lecturer: true, subject: true, group: true },
+      include: { lessons: true },
     });
   }
 
   findOne(id: number) {
     return this.prisma.template.findUnique({
       where: { id },
-      include: { lecturer: true, subject: true, group: true },
+      include: { lessons: true },
     });
   }
 
-  update(id: number, data: UpdateTemplateInput) {
+  update(
+    id: number,
+    {
+      group,
+      lecturer,
+      subject,
+      groupType,
+      lessonType,
+      link,
+      cabinet,
+    }: UpdateTemplateInput,
+  ) {
     return this.prisma.template.update({
       where: { id },
-      data,
-      include: { lecturer: true, subject: true, group: true },
+      data: {
+        group,
+        lecturer,
+        subject,
+        groupType,
+        lessonType,
+        link,
+        cabinet,
+      },
+      include: { lessons: true },
     });
   }
 

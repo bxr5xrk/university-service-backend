@@ -11,13 +11,13 @@ export class GroupService {
       data: {
         title,
       },
-      include: { students: true, lecturers: true, templates: true },
+      include: { students: true, lecturers: true },
     });
   }
 
   findAll() {
     return this.prisma.group.findMany({
-      include: { students: true, lecturers: true, templates: true },
+      include: { students: true, lecturers: true },
     });
   }
 
@@ -26,14 +26,14 @@ export class GroupService {
       where: {
         id,
       },
-      include: { students: true, lecturers: true, templates: true },
+      include: { students: true, lecturers: true },
     });
   }
 
   async update(id: number, { title, lecturerId }: UpdateGroupInput) {
     const findLecturers = await this.prisma.group.findUnique({
       where: { id },
-      include: { students: true, lecturers: true, templates: true },
+      include: { students: true, lecturers: true },
     });
 
     return this.prisma.group.update({
@@ -42,14 +42,13 @@ export class GroupService {
         title,
         lecturers: addOrRemoveLecturer(findLecturers.lecturers, lecturerId),
       },
-      include: { students: true, lecturers: true, templates: true },
+      include: { students: true, lecturers: true },
     });
   }
 
   remove(id: number) {
     return this.prisma.group.delete({
       where: { id },
-      include: { students: true, lecturers: true, templates: true },
     });
   }
 }

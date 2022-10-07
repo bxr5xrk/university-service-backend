@@ -14,6 +14,7 @@ export class LessonScheduleService {
         order,
         time,
       },
+      include: { lessons: true },
     });
   }
 
@@ -24,6 +25,7 @@ export class LessonScheduleService {
   findOne(id: number) {
     return this.prisma.lessonSchedule.findUnique({
       where: { id },
+      include: { lessons: true },
     });
   }
 
@@ -34,6 +36,7 @@ export class LessonScheduleService {
         order,
         time,
       },
+      include: { lessons: true },
     });
   }
 

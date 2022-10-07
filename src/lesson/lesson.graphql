@@ -1,0 +1,29 @@
+type Lesson {
+  id: Int!
+  lessonScheduleId: Int!
+  templateId: Int!
+  lessonSchedule: LessonSchedule!
+  template: Template!
+}
+
+input CreateLessonInput {
+  lessonScheduleId: Int!
+  templateId: Int!
+}
+
+input UpdateLessonInput {
+  id: Int!
+  lessonScheduleId: Int
+  templateId: Int
+}
+
+type Query {
+  lessons: [Lesson]!
+  lesson(id: Int!): Lesson
+}
+
+type Mutation {
+  createLesson(createLessonInput: CreateLessonInput!): Lesson!
+  updateLesson(updateLessonInput: UpdateLessonInput!): Lesson!
+  removeLesson(id: Int!): Lesson
+}

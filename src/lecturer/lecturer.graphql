@@ -3,7 +3,6 @@ type Lecturer {
   fullName: String!
   groups: [Group!]!
   subjects: [Subject!]!
-  templates: [Template!]!
 }
 
 input CreateLecturerInput {

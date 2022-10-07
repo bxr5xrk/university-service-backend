@@ -2,6 +2,7 @@ type Student {
   id: Int!
   fullName: String!
   groupId: Int!
+  group: Group!
 }
 
 input CreateStudentInput {

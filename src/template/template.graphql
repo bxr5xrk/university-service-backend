@@ -1,15 +1,13 @@
 type Template {
   id: Int!
-  groupId: Int!
-  lecturerId: Int!
-  subjectId: Int!
+  group: String!
+  lecturer: String!
+  subject: String!
   groupType: groupType!
   lessonType: lessonType!
-  lecturer: Lecturer!
-  group: Group!
-  subject: Subject!
   link: String
   cabinet: String
+  lessons: [Lesson]
 }
 
 enum groupType {
@@ -25,9 +23,9 @@ enum lessonType {
 }
 
 input CreateTemplateInput {
-  groupId: Int!
-  lecturerId: Int!
-  subjectId: Int!
+  group: String!
+  lecturer: String!
+  subject: String!
   groupType: groupType!
   lessonType: lessonType!
   link: String
@@ -36,8 +34,9 @@ input CreateTemplateInput {
 
 input UpdateTemplateInput {
   id: Int!
-  groupId: Int
-  lecturerId: Int
+  group: String
+  lecturer: String
+  subject: String
   subjectId: Int
   groupType: groupType
   lessonType: lessonType

@@ -2,6 +2,7 @@ type LessonSchedule {
   id: Int!
   order: Int!
   time: String!
+  lessons: [Lesson!]!
 }
 
 input CreateLessonScheduleInput {

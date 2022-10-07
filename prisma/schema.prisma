@@ -12,7 +12,6 @@ model Group {
   title     String     @unique
   students  Student[]
   lecturers Lecturer[]
-  templates Template[]
 }
 
 model Student {
@@ -23,36 +22,41 @@ model Student {
 }
 
 model Lecturer {
-  id        Int        @id @default(autoincrement())
-  fullName  String     @unique
-  groups    Group[]
-  subjects  Subject[]
-  templates Template[]
+  id       Int       @id @default(autoincrement())
+  fullName String    @unique
+  groups   Group[]
+  subjects Subject[]
 }
 
 model Subject {
   id        Int        @id @default(autoincrement())
   title     String
   lecturers Lecturer[]
-  templates Template[]
 }
 
 model LessonSchedule {
-  id    Int    @id @default(autoincrement())
-  order Int    @default(1)
-  time  String @default("08:30-09:50")
+  id      Int      @id @default(autoincrement())
+  order   Int      @default(1)
+  time    String   @default("08:30-09:50")
+  lessons Lesson[]
 }
 
 model Template {
   id         Int      @id @default(autoincrement())
-  group      Group    @relation(fields: [groupId], references: [id])
-  groupId    Int
-  lecturer   Lecturer @relation(fields: [lecturerId], references: [id])
-  lecturerId Int
-  subject    Subject  @relation(fields: [subjectId], references: [id])
-  subjectId  Int
+  group      String   @default("КІ-31")
+  lecturer   String   @default("Голота Віктор")
+  subject    String   @default("Системне програмування")
   groupType  String
   lessonType String
   link       String?
   cabinet    String?
+  lessons    Lesson[]
+}
+
+model Lesson {
+  id               Int            @id @default(autoincrement())
+  lessonScheduleId Int
+  templateId       Int
+  lessonSchedule   LessonSchedule @relation(fields: [lessonScheduleId], references: [id])
+  template         Template       @relation(fields: [templateId], references: [id])
 }

@@ -51,6 +51,17 @@ export class UpdateLessonScheduleInput {
     time?: Nullable<string>;
 }
 
+export class CreateLessonInput {
+    lessonScheduleId: number;
+    templateId: number;
+}
+
+export class UpdateLessonInput {
+    id: number;
+    lessonScheduleId?: Nullable<number>;
+    templateId?: Nullable<number>;
+}
+
 export class CreateStudentInput {
     fullName: string;
     groupId: number;
@@ -72,9 +83,9 @@ export class UpdateSubjectInput {
 }
 
 export class CreateTemplateInput {
-    groupId: number;
-    lecturerId: number;
-    subjectId: number;
+    group: string;
+    lecturer: string;
+    subject: string;
     groupType: groupType;
     lessonType: lessonType;
     link?: Nullable<string>;
@@ -83,8 +94,9 @@ export class CreateTemplateInput {
 
 export class UpdateTemplateInput {
     id: number;
-    groupId?: Nullable<number>;
-    lecturerId?: Nullable<number>;
+    group?: Nullable<string>;
+    lecturer?: Nullable<string>;
+    subject?: Nullable<string>;
     subjectId?: Nullable<number>;
     groupType?: Nullable<groupType>;
     lessonType?: Nullable<lessonType>;
@@ -95,9 +107,8 @@ export class UpdateTemplateInput {
 export class Group {
     id: number;
     title: string;
-    students: Student[];
+    students?: Nullable<Student[]>;
     lecturers: Lecturer[];
-    templates: Template[];
 }
 
 export abstract class IQuery {
@@ -112,6 +123,10 @@ export abstract class IQuery {
     abstract lessonSchedules(): Nullable<LessonSchedule>[] | Promise<Nullable<LessonSchedule>[]>;
 
     abstract lessonSchedule(id: number): Nullable<LessonSchedule> | Promise<Nullable<LessonSchedule>>;
+
+    abstract lessons(): Nullable<Lesson>[] | Promise<Nullable<Lesson>[]>;
+
+    abstract lesson(id: number): Nullable<Lesson> | Promise<Nullable<Lesson>>;
 
     abstract students(): Nullable<Student>[] | Promise<Nullable<Student>[]>;
 
@@ -145,6 +160,12 @@ export abstract class IMutation {
 
     abstract removeLessonSchedule(id: number): Nullable<LessonSchedule> | Promise<Nullable<LessonSchedule>>;
 
+    abstract createLesson(createLessonInput: CreateLessonInput): Lesson | Promise<Lesson>;
+
+    abstract updateLesson(updateLessonInput: UpdateLessonInput): Lesson | Promise<Lesson>;
+
+    abstract removeLesson(id: number): Nullable<Lesson> | Promise<Nullable<Lesson>>;
+
     abstract createStudent(createStudentInput: CreateStudentInput): Student | Promise<Student>;
 
     abstract updateStudent(updateStudentInput: UpdateStudentInput): Student | Promise<Student>;
@@ -169,39 +190,46 @@ export class Lecturer {
     fullName: string;
     groups: Group[];
     subjects: Subject[];
-    templates: Template[];
 }
 
 export class LessonSchedule {
     id: number;
     order: number;
     time: string;
+    lessons: Lesson[];
+}
+
+export class Lesson {
+    id: number;
+    lessonScheduleId: number;
+    templateId: number;
+    lessonSchedule: LessonSchedule;
+    template: Template;
 }
 
 export class Student {
     id: number;
     fullName: string;
     groupId: number;
+    group: Group;
 }
 
 export class Subject {
     id: number;
     title: string;
-    lecturers: Lecturer[];
+    lecturers?: Nullable<Lecturer[]>;
 }
 
 export class Template {
     id: number;
-    groupId: number;
-    lecturerId: number;
-    subjectId: number;
+    group: string;
+    lecturer: string;
+    subject: string;
     groupType: groupType;
     lessonType: lessonType;
-    lecturer: Lecturer;
-    group: Group;
-    subject: Subject;
     link?: Nullable<string>;
     cabinet?: Nullable<string>;
+    lessons?: Nullable<Nullable<Lesson>[]>;
 }
 
 type Nullable<T> = T | null;

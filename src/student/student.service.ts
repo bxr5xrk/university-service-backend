@@ -12,16 +12,18 @@ export class StudentService {
         fullName,
         groupId,
       },
+      include: { group: true },
     });
   }
 
   findAll() {
-    return this.prisma.student.findMany();
+    return this.prisma.student.findMany({ include: { group: true } });
   }
 
   findOne(id: number) {
     return this.prisma.student.findUnique({
       where: { id },
+      include: { group: true },
     });
   }
 
@@ -29,6 +31,7 @@ export class StudentService {
     return this.prisma.student.update({
       where: { id },
       data: { fullName, groupId },
+      include: { group: true },
     });
   }
 

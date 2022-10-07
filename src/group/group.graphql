@@ -1,9 +1,8 @@
 type Group {
   id: Int!
   title: String!
-  students: [Student!]!
+  students: [Student!]
   lecturers: [Lecturer!]!
-  templates: [Template!]!
 }
 
 input CreateGroupInput {

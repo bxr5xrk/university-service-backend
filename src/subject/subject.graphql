@@ -1,7 +1,7 @@
 type Subject {
   id: Int!
   title: String!
-  lecturers: [Lecturer!]!
+  lecturers: [Lecturer!]
 }
 
 input CreateSubjectInput {
