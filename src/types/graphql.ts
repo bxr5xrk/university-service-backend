@@ -35,8 +35,8 @@ export class CreateLessonScheduleInput {
 
 export class UpdateLessonScheduleInput {
     id: number;
-    order: number;
-    time: string;
+    order?: Nullable<number>;
+    time?: Nullable<string>;
 }
 
 export class CreateStudentInput {

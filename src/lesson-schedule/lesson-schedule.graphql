@@ -4,7 +4,6 @@ type LessonSchedule {
   time: String!
 }
 
-
 input CreateLessonScheduleInput {
   order: Int!
   time: String!
@@ -12,8 +11,8 @@ input CreateLessonScheduleInput {
 
 input UpdateLessonScheduleInput {
   id: Int!
-  order: Int!
-  time: String!
+  order: Int
+  time: String
 }
 
 type Query {
