@@ -33,30 +33,3 @@ model Subject {
   title     String
   lecturers Lecturer[]
 }
-
-model LessonSchedule {
-  id      Int      @id @default(autoincrement())
-  order   Int      @default(1)
-  time    String   @default("08:30-09:50")
-  lessons Lesson[]
-}
-
-model Template {
-  id         Int      @id @default(autoincrement())
-  group      String   @default("КІ-31")
-  lecturer   String   @default("Голота Віктор")
-  subject    String   @default("Системне програмування")
-  groupType  String
-  lessonType String
-  link       String?
-  cabinet    String?
-  lessons    Lesson[]
-}
-
-model Lesson {
-  id               Int            @id @default(autoincrement())
-  lessonScheduleId Int
-  templateId       Int
-  lessonSchedule   LessonSchedule @relation(fields: [lessonScheduleId], references: [id])
-  template         Template       @relation(fields: [templateId], references: [id])
-}

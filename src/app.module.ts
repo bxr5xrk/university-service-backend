@@ -10,9 +10,6 @@ import { StudentModule } from './student/student.module';
 import { GroupModule } from './group/group.module';
 import { LecturerModule } from './lecturer/lecturer.module';
 import { SubjectModule } from './subject/subject.module';
-import { LessonScheduleModule } from './lesson-schedule/lesson-schedule.module';
-import { TemplateModule } from './template/template.module';
-import { LessonModule } from './lesson/lesson.module';
 
 @Module({
   imports: [
@@ -31,9 +28,6 @@ import { LessonModule } from './lesson/lesson.module';
     GroupModule,
     LecturerModule,
     SubjectModule,
-    LessonScheduleModule,
-    TemplateModule,
-    LessonModule,
   ],
 
   controllers: [AppController],
