@@ -8,3 +8,5 @@ Stack
 - GraphQL
 - Prisma
 - PostgreSQL
+
+__.env file includes data for database__
